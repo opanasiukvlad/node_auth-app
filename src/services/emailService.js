@@ -2,9 +2,6 @@
 
 require('dotenv').config();
 
-// eslint-disable-next-line no-console
-console.log(process.env); // remove this after you've confirmed it is working
-
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
@@ -27,6 +24,20 @@ function send({ email, subject, html }) {
   });
 };
 
+function sendActivationLink(email, token) {
+  const link = `${process.env.CLIENT_URL}/activation/${token}`;
+
+  return send({
+    email,
+    subject: 'Account activation',
+    html: `
+    <h1>Account activation</h1>
+    <a href="${link}">${link}</a>
+    `,
+  });
+}
+
 module.exports = {
   send,
+  sendActivationLink,
 };

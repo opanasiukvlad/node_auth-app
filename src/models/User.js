@@ -1,7 +1,7 @@
 'use strict';
 
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../db');
+const { sequelize } = require('../utils/db');
 
 const User = sequelize.define('user', {
   email: {
@@ -12,6 +12,9 @@ const User = sequelize.define('user', {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  activationToken: {
+    type: DataTypes.STRING,
   },
 }, {
   tableName: 'users',
